@@ -10,7 +10,7 @@ using Video.Streaming.Models;
 
 namespace Video.Streaming.Controllers
 {
-    [Authorize]
+
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

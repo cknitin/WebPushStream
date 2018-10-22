@@ -7,10 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using Video.Streaming.Models;
 using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace Video.Streaming.Controllers
 {
-    //[Authorize(Roles = "paid,free")]
+    [Authorize]
     public class UserController : Controller
     {
         ApplicationDbContext context;
@@ -44,10 +45,12 @@ namespace Video.Streaming.Controllers
             List<Videos> videos = new List<Videos>();
             foreach (var item in assignedVideoList)
             {
+
+
                 videos.Add(new Videos
                 {
                     Description = item.Description,
-                    FilePath = item.FilePath,
+                    FilePath = "/api/videos/"+ Path.GetExtension(item.FilePath).Replace(".", "")+"/" + Path.GetFileNameWithoutExtension(item.FilePath),
                     Key = item.Key,
                     Name = item.Name,
                     Title = item.Title,

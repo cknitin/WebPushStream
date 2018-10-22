@@ -1,5 +1,8 @@
 ﻿@model List<Video.Streaming.Models.Videos>
 
+
+
+
 <style type="text/css">
     .video-frame {
         width: 100%;
@@ -40,7 +43,7 @@
                         <div class="col-sm-4 col-md-4 col-xs-12">
                             <div class="title">@item.Name</div>
                             <div class="video-frame">
-                                <video style="width:100%; height:150px; width:100%" controls>
+                                <video id="myVideo" oncontextmenu="return false;" style="width:100%; height:150px; width:100%" controls controlsList="nodownload">
                                     <source src="@Url.Content(@item.FilePath)" type="video/mp4" />
                                 </video>
                             </div>
