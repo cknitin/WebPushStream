@@ -32,7 +32,7 @@ namespace Video.Streaming.Controllers
 
         //}
 
-        #region Old Code
+        #region new Code
 
         public HttpResponseMessage Get(string filename, string ext)
         {

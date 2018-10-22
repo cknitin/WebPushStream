@@ -22,7 +22,7 @@ namespace Video.Streaming
 
             config.Routes.MapHttpRoute(
                name: "DefaultVideo",
-               routeTemplate: "video-ext/{controller}/{ext}/{filename}"
+               routeTemplate: "api/{controller}/{ext}/{filename}"
            );
 
         }
