@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPushStream", "WebPushStream\WebPushStream.csproj", "{973523FE-9F63-427E-BEF8-BC11D98172C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebVideoStream", "WebVideoStream\WebVideoStream.csproj", "{DA83D05E-FF24-44EA-88B0-74A10E8E964E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video.Streaming", "Video.Streaming\Video.Streaming.csproj", "{9069469C-D9CB-49B2-A011-C93723115069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{973523FE-9F63-427E-BEF8-BC11D98172C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{973523FE-9F63-427E-BEF8-BC11D98172C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{973523FE-9F63-427E-BEF8-BC11D98172C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{973523FE-9F63-427E-BEF8-BC11D98172C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA83D05E-FF24-44EA-88B0-74A10E8E964E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA83D05E-FF24-44EA-88B0-74A10E8E964E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA83D05E-FF24-44EA-88B0-74A10E8E964E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA83D05E-FF24-44EA-88B0-74A10E8E964E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9069469C-D9CB-49B2-A011-C93723115069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9069469C-D9CB-49B2-A011-C93723115069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9069469C-D9CB-49B2-A011-C93723115069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9069469C-D9CB-49B2-A011-C93723115069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

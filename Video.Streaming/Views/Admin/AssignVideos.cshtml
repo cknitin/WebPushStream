@@ -1,0 +1,154 @@
+﻿@model Video.Streaming.Models.AssignVideoModel
+@{
+    ViewBag.Title = "Assign Videos";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+
+
+@using (Html.BeginForm("AssignVideos", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("User Email", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("UserId", Model.UserList, "Select", new { @class = "form-control", onchange = "SelectUser()", @id = "ddlSelectuser" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Videos", new { @class = "col-md-2 control-label" })
+
+        <div class="row">
+            <div class="col-sm-3"> @Html.ListBox("ID", Model.VideoList, new { @id = "listVideoList", @class = "form-control" })</div>
+            <div class="col-sm-2" style="text-align:center">
+                <button type="button" id="addItem" class="btn btn-success" onclick="AssignVideo()">>>></button>
+                <br />
+                <br />
+                <button type="button" id="removeItem" class="btn btn-success" onclick="RemoveAssignVideo()"><<<</button>
+            </div>
+            <div class="col-sm-3">
+                @Html.ListBox("VideosIds", Model.AssignedVideoList, new { @id = "listAssignedVideoList", @class = "form-control" })
+                @Html.HiddenFor(x => x.VideoIds, new { id = "VideoIds" })
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Submit" />
+            <br />
+            <br />
+
+            <span class="text-danger">@ViewBag.Message</span>
+            <br />
+        </div>
+    </div>
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    function AssignVideo() {
+        var listVideoList = document.getElementById('listVideoList');
+        var listAssignedVideoList = document.getElementById('listAssignedVideoList');
+        var id = listVideoList.selectedIndex;
+
+        if (id > -1) {
+
+            var opt = document.createElement("option");
+            opt.text = listVideoList[id].text;
+            opt.value = listVideoList[id].value;
+
+
+            listAssignedVideoList.options.add(opt);
+
+            listVideoList.remove(id);
+
+            var hdVideoIds = document.getElementById('VideoIds');
+
+            if (hdVideoIds.value != '') {
+                hdVideoIds.value += ","
+            }
+            hdVideoIds.value += opt.value;
+        }
+        else {
+            alert('Please select the video');
+        }
+    }
+
+    function RemoveAssignVideo() {
+        var listVideoList = document.getElementById('listVideoList');
+        var listAssignedVideoList = document.getElementById('listAssignedVideoList');
+
+        var id = listAssignedVideoList.selectedIndex;
+
+        if (id > -1) {
+
+            var opt = document.createElement("option");
+            opt.text = listAssignedVideoList[id].text;
+            opt.value = listAssignedVideoList[id].value;
+
+
+            listVideoList.options.add(opt);
+
+            listAssignedVideoList.remove(id);
+
+        }
+        else {
+            alert('Please select the video from assign');
+        }
+    }
+
+
+    function SelectUser() {
+
+        var ddlSelectUser = document.getElementById('ddlSelectuser');
+
+        if (ddlSelectUser.selectedIndex > -1) {
+            $("#listAssignedVideoList").empty()
+            $("#listVideoList").empty()
+            $.ajax(
+                {
+                    url: '/admin/SelectUser?userId=' + ddlSelectUser.options[ddlSelectUser.selectedIndex].value,
+                    type: 'GET',
+                    data: "",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        var listVideoList = document.getElementById('listVideoList');
+                        var assignedVideoList = data["AssignedVideoList"];
+                        var videoList = data["VideoList"];
+
+                        $.each(videoList, function (index, value) {
+                            $('#listVideoList').append($('<option>').text(videoList[index].Name).val(videoList[index].ID));
+                        });
+
+                        $.each(assignedVideoList, function (index, value) {
+                            $('#listAssignedVideoList').append($('<option>').text(assignedVideoList[index].Name).val(assignedVideoList[index].VideoId));
+
+                            $("#listVideoList option[value='" + assignedVideoList[index].VideoId+"']").remove();
+
+
+                            //listVideoList.remove(assignedVideoList[index].VideoId);
+
+                        });
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+        }
+        else {
+            alert('Select any user.');
+        }
+    }
+
+</script>

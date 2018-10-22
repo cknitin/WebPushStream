@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Video List";
+}
+
+<style type="text/css">
+    .video-frame {
+        width: 100%;
+        height: 150px;
+        border: 4px solid #dc3545;
+        box-shadow: 1px 2px 3px #dc3545;
+        border-radius: 3px;
+    }
+
+    .title {
+        font-weight: 500;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        background-color: #dc3545;
+        color: white;
+        box-shadow: 1px 2px 4px #dc3545;
+    }
+</style>
+
+
+<h2>Video List</h2>
+
+<div class="container py-4">
+    <h3 class="text-center text-uppercase">List of videos</h3>
+    <div class="card">
+        <div class="card-header title text-white">
+            <h6 class="text-uppercase">video List</h6>
+        </div>
+        <div class="card-body">
+
+            @if (Model != null)
+            {
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-4 col-md-4 col-xs-12">
+                            <div class="title">@item.Name</div>
+                            <div class="video-frame">
+                                <video style="width:100%; height:150px; width:100%" controls>
+                                    <source src="@Url.Content(@item.FilePath)" type="video/mp4" />
+                                </video>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
